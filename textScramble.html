@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Scramble</title>
+</head>
+
+<body>
+    <div id="scrambled-text">
+        <span>W</span>
+        <span>O</span>
+        <span>R</span>
+        <span>K</span>
+    </div>
+    <style>
+        #scrambled-text span {
+  display: inline-block;
+  font-size: 40px;
+  font-family: 'Arial', sans-serif;
+  transition: transform 0.3s ease;
+}
+
+    </style>
+    <script>
+        // Função para embaralhar as letras entre si
+function scrambleLetters(letters) {
+  // Embaralha a ordem das letras
+  const shuffled = letters.sort(() => Math.random() - 0.5);
+
+  // Altera a posição de cada letra de acordo com a ordem embaralhada
+  shuffled.forEach((letter, index) => {
+    gsap.to(letter, { 
+      duration: 0.3, 
+      x: Math.random() * 50 - 25,  // Um pequeno movimento horizontal
+      y: Math.random() * 50 - 25,  // Um pequeno movimento vertical
+      rotation: Math.random() * 180,  // Aleatório no eixo de rotação
+      ease: "power2.inOut" 
+    });
+  });
+  
+  return shuffled;
+}
+
+// Função para restaurar o texto original
+function restoreLetters(letters, originalText) {
+  letters.forEach((letter, index) => {
+    gsap.to(letter, {
+      duration: 0.5,
+      x: 0,  // Restaura a posição original
+      y: 0,
+      rotation: 0,
+      text: { value: originalText[index] },
+      ease: "power2.inOut"
+    });
+  });
+}
+
+// Seleciona o elemento do texto e as letras
+const textElement = document.getElementById('scrambled-text');
+const letters = textElement.querySelectorAll('span');
+
+// Armazena o texto original para restaurar depois
+const originalText = Array.from(letters).map(letter => letter.textContent);
+
+// Embaralha as letras ao passar o mouse (hover)
+textElement.addEventListener('mouseenter', () => {
+  scrambleLetters(Array.from(letters));
+});
+
+// Restaura o texto original ao sair do hover
+textElement.addEventListener('mouseleave', () => {
+  restoreLetters(letters, originalText);
+});
+
+    </script>
+</body>
+
+</html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>

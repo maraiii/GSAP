@@ -117,68 +117,6 @@ tl.to(".preloader", {
   );
 gsap.registerPlugin(ScrollTrigger);
 
-// Initial setup for #page
-gsap.set("#page", {
-  opacity: 0.873618, // Initial opacity
-  transform: "translateY(5.05529px) scale(0.993681) translateZ(0px)", // Initial transform
-});
-
-// Animate the text spans inside #page2
-const texts = document.querySelectorAll("#page2 h2 span");
-
-texts.forEach((text) => {
-  gsap.set(text, { y: "100%", opacity: 0 }); // Set initial state for each span
-});
-
-// Animate the text spans when #page2 appears
-gsap.to(texts, {
-  y: 0,
-  opacity: 1,
-  stagger: 0.2,
-  duration: 1,
-  ease: "power4.out",
-  scrollTrigger: {
-    trigger: "#page2",
-    start: "top 100%",
-    toggleActions: "play none none none",
-  },
-});
-
-gsap.to(".ek", {
-  duration: 3,
-  scrollTrigger: {
-    trigger: ".ek",
-    start: "top 10%",
-    end: "bottom -27%",
-    scrub: true,
-    pin: true,
-    pinSpacing: false,
-  },
-});
-
-gsap.to(".do", {
-  duration: 3,
-  scrollTrigger: {
-    trigger: ".do",
-    start: "top 27%",
-    end: "bottom 40%",
-    scrub: true,
-    pin: true,
-    pinSpacing: false,
-  },
-});
-
-gsap.to(".tin", {
-  duration: 3,
-  scrollTrigger: {
-    trigger: ".tin",
-    start: "top 45%",
-    end: "bottom 100%",
-    scrub: true,
-    pin: true,
-    pinSpacing: false,
-  },
-});
 
 // Page 3
 
